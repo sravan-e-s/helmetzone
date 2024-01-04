@@ -1,0 +1,42 @@
+{% extends 'Deleveryboy/Home.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table border="4" align="center" cellpadding="10" style="border-collapse: collapse;" >
+        <tr>
+            <td>Name</td>
+            <td><input type="text" name="txtname1" id=""value="{{dat.name}}"></td>
+        </tr>
+        <tr>
+            <td>Contact</td>
+            <td><input type="text" name="txtcontact1" id=""value="{{dat.contact}}"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text" name="txtemail1" id=""value="{{dat.email}}"></td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td><input type="text" name="txtaddress1" id=""value="{{dat.address}}"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" name="save" value="Update">
+                <input type="submit" name="save" value="Cancel"></td>    
+        </tr>
+    </table>
+    </form>
+</body>
+</html>
+
+{% endblock content %}

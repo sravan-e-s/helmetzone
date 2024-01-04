@@ -1,0 +1,46 @@
+{% extends 'Seller/Head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .pcoded-inner-content{
+        background-image: url(../../../Guest/static/main/images/pexels-photo-1323712.webp);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size:cover;
+        
+    }
+    .clrfrm{
+        background-color: rgb(225, 243, 243);
+        opacity:95%;
+    }
+    </style>
+    <div class="pcoded-inner-content">
+<body>
+    <br><br><br>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table align="center" border="0" class="clrfrm">
+            <tr><td colspan="2" align="center"><h4 align="center">Send your Feedbacks Here........</h4></td></tr>
+            <tr>
+                <td>Enter the feedback</td>
+                <td><textarea name="feeed" id="" cols="30" rows="10"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Send feedback"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+<br><br><br><br><br><br>
+</div>
+</html>
+
+{% endblock content %}

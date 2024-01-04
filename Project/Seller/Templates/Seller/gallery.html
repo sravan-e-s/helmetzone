@@ -1,0 +1,49 @@
+{% extends 'Seller/Head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .pcoded-inner-content{
+        background-image: url(../../../Guest/static/main/images/zzzz.avif);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size:cover;
+        
+    }
+    .clrfrm{
+        background-color: rgb(225, 243, 243);
+        opacity:95%;
+    }
+</style>
+<div class="pcoded-inner-content">
+    <br><br><br><br><br><br><br>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table border="0" align="center" cellpadding="10" class="clrfrm">
+        <tr>
+            <td colspan="2" align="center"><h3><u>Add images</u></h3></td>
+        </tr>
+        <tr>
+            <td>Files to upload</td>
+            <td><input type="file" name="gimage" id=""></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><input type="reset" value="Reset"><input type="submit" value="Upload"></td>
+        </tr>
+        </table>
+    </form>
+</body>
+<br><br><br><br><br>
+</div>
+</html>
+
+
+{% endblock content %}

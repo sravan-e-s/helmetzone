@@ -1,0 +1,30 @@
+{% extends 'User/Head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body align="center"  background="{% static 'main/images/;;.jpg' %}">
+    <h3 align="center">Send your feedbacks here..........</h3>
+    <form action="" method="POST">
+        {% csrf_token %}
+        
+        <table align="center" border="3">
+            <tr>
+                <td>Enter the feedback</td>
+                <td><textarea name="feed" id="" cols="30" rows="10"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Send feedback"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+
+{% endblock content %}

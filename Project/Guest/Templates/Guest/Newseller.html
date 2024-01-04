@@ -1,0 +1,173 @@
+{% extends 'Guest/Head.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .pcoded-inner-content{
+        background-image: url(../../../Guest/static/main/images/ccc.webp);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size:cover;
+        
+    }
+    .clrfrm{
+        background-color: rgb(225, 243, 243);
+        opacity:95%;
+    }
+</style>
+<div class="pcoded-inner-content">
+<body >
+    <br><br>
+    <form action="" method="POST" id="SellerForm" enctype="multipart/form-data" data-place-url="{% url 'Guest:Ajax-place' %}">
+        {% csrf_token %}
+        <table border="0" align="center" cellpadding="10" style="border-collapse: collapse;" class="clrfrm">
+            <tr>
+                <td colspan="2" align="center"><h3>Seller Sign-up</h3></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="name1" id="" value="" required="" autocomplete="off" onchange="nameval(this)">
+                    <div id="name"></div></td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="text" name="contact1" id="" value=""minlength="10" maxlength="10" required="" autocomplete="off" onchange="checknum(this)">
+                    <div id="contact"></div></td>
+            </tr>
+            <tr>
+                <td>E-mail</td>
+                <td><input type="text" name="email1" id="" value="" required="" autocomplete="off" onchange="emailval(this)">
+                    <div id="content"></div></td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td><textarea name="address1" id="" cols="23" rows="5" autocomplete="off" required=""></textarea></td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td><select name="disid2" id="disid2" required=""><option value="dis">--select--</option>
+                    {% for i in dis %}
+                    <option value="{{i.id}}">{{i}}</option>
+                    {% endfor %}
+            </select></td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td>
+                    <select name="selplace" id="selplace" required=""><option value="pl">--select--</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Logo</td>
+                <td><input type="file" name="logo1" id="" value="" required="" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td>Proof</td>
+                <td><input type="file" name="proof1" id="" value="" required="" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="pass1" id="" value="" required="" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td>Conform Password</td>
+                <td><input type="password"  name="cpswd" id="" required="" autocomplete="off" onchange="chkpwd(this,pass1)">
+                    <div id="pass"></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Register" name="btnsave"> <input type="reset" value="Cancel" name="btncan"></td>
+            </tr>
+        </table>
+    </div>
+    </form>
+    <br><br><br>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#disid2").change(function () {
+            var did = $(this).val();
+            var ur = $("#SellerForm").attr("data-place-url");
+            $.ajax({
+                url: ur,
+                data: { disd: did, },
+                success: function (data) {
+                    $("#selplace").html(data);
+                },
+            });
+        });
+
+
+        function chkpwd(txtrp, txtp)
+        {
+            if((txtrp.value)!=(txtp.value))
+            {
+                document.getElementById("pass").innerHTML = "<span style='color: red;'>Passwords Mismatch</span>";
+            }
+        }
+        
+        function checknum(elem)
+        {
+            var numericExpression = /^[0-9]{8,10}$/;
+            if(elem.value.match(numericExpression))
+            {
+                document.getElementById("contact").innerHTML = "";
+                return true;
+            }
+            else
+            {
+                document.getElementById("contact").innerHTML = "<span style='color: red;'>Numbers Only Allowed</span>";
+                elem.focus();
+                return false;
+            }
+        }
+        
+        
+        
+        function emailval(elem)
+        {
+            var emailexp=/^([a-zA-Z0-9.\_\-])+\@([a-zA-Z0-9.\_\-])+\.([a-zA-Z]{2,4})$/;
+            if(elem.value.match(emailexp))
+            {
+                document.getElementById("content").innerHTML = "";
+                return true;
+            }
+            else
+            {
+                
+                document.getElementById("content").innerHTML ="<span style='color: red;'>Check Email Address Entered</span>";;
+                elem.focus();
+                return false;
+            }
+        }
+        function nameval(elem)
+        {
+            var emailexp=/^([A-Za-z ]*)$/;
+            if(elem.value.match(emailexp))
+            {
+                document.getElementById("name").innerHTML = "";
+                return true;
+            }
+            else
+            {
+                
+                document.getElementById("name").innerHTML = "<span style='color: red;'>Alphabets Are Allowed</span>";
+                elem.focus();
+                return false;
+            }
+        }
+    </script>
+</body>
+<br><br><br>
+</html>
+
+
+{% endblock content %}

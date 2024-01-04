@@ -1,0 +1,174 @@
+{% extends 'Guest/Head.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .pcoded-inner-content{
+        background-image: url(../../../Guest/static/main/images/ccc.webp);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size:cover;
+        
+    }
+    .clrfrm{
+        background-color: rgb(174, 219, 219);
+        opacity:95%;
+    }
+</style>
+<div class="pcoded-inner-content">
+<body>
+    <br><br>
+    <form action="" method="POST" id="UserForm" enctype="multipart/form-data" data-place-url="{% url 'Guest:Ajax-place' %}">
+        {% csrf_token %}
+        <table border="0" align="center" cellpadding="10" style="border-collapse: collapse;" class="clrfrm">
+            <tr>
+                <td colspan="2" align="center"><h3>Customer  Sign-up</h3></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="name2" id="" value="" autocomplete="off" onchange="nameval(this)">
+                    <div id="name"></td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="text" name="contact2" id="" value="" autocomplete="off" onchange="checknum(this)">
+                    <div id="contact"></div></td>
+            </tr>
+            <tr>
+                <td>E-mail</td>
+                <td><input type="email" name="email2" id="" value="" autocomplete="off" onchange="emailval(this)">
+                    <div id="content"></div></td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>
+                    <textarea name="adder2" id="" cols="23" rows="5" autocomplete="off" onchange="nameval(this)"></textarea></td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td><select name="disid2" id="disid2">
+                    <option value="">--select--</option>
+                    {% for i in dis %}
+                        <option value="{{i.id}}">{{i}}</option>
+                    {% endfor %}
+                </select></td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td><select name="selplace" id="selplace">
+                    <option value="">--select--</option>
+                    <option value=""></option>
+                </select></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td><input type="radio" name="gender" id="" value="Male">Male
+                <input type="radio" name="gender" id="" value="Female">Female</td>
+            </tr>
+            <tr>
+                <td>Photo</td>
+                <td><input type="file" name="file2" id=""></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="pass2" id="" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td>Conform password</td>
+                <td><input type="password" name="cpswd" id="" required="" autocomplete="off" onchange="chkpwd(this,pass2)">
+            
+                <div id="pass"></div></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Register" name="btnsave"> <input type="reset" value="Cancel" name="btncan"></td>
+            </tr>
+        </table>
+    </form>
+    <br><br>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#disid2").change(function () {
+            var did = $(this).val();
+            var ur = $("#UserForm").attr("data-place-url");
+            $.ajax({
+                url: ur,
+                data: { disd: did, },
+                success: function (data) {
+                    $("#selplace").html(data);
+                },
+            });
+        });
+        function chkpwd(txtrp, txtp)
+        {
+            if((txtrp.value)!=(txtp.value))
+            {
+                document.getElementById("pass").innerHTML = "<span style='color: red;'>Passwords Mismatch</span>";
+            }
+        }
+        
+        function checknum(elem)
+        {
+            var numericExpression = /^[0-9]{8,10}$/;
+            if(elem.value.match(numericExpression))
+            {
+                document.getElementById("contact").innerHTML = "";
+                return true;
+            }
+            else
+            {
+                document.getElementById("contact").innerHTML = "<span style='color: red;'>Numbers Only Allowed</span>";
+                elem.focus();
+                return false;
+            }
+        }
+        
+        
+        
+        function emailval(elem)
+        {
+            var emailexp=/^([a-zA-Z0-9.\_\-])+\@([a-zA-Z0-9.\_\-])+\.([a-zA-Z]{2,4})$/;
+            if(elem.value.match(emailexp))
+            {
+                document.getElementById("content").innerHTML = "";
+                return true;
+            }
+            else
+            {
+                
+                document.getElementById("content").innerHTML ="<span style='color: red;'>Check Email Address Entered</span>";;
+                elem.focus();
+                return false;
+            }
+        }
+        function nameval(elem)
+        {
+            var emailexp=/^([A-Za-z ]*)$/;
+            if(elem.value.match(emailexp))
+            {
+                document.getElementById("name").innerHTML = "";
+                return true;
+            }
+            else
+            {
+                
+                document.getElementById("name").innerHTML = "<span style='color: red;'>Alphabets Are Allowed</span>";
+                elem.focus();
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
+
+<br><br>
+
+{% endblock content %}

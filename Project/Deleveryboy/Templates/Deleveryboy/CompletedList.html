@@ -1,0 +1,41 @@
+{% extends 'Deleveryboy/Home.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% csrf_token %}
+    <table border="1" align="center" cellpadding="10">
+        <tr>
+            <th>SL.No</th>
+            <th>Customer Name</th>
+            <th>Item selected</th>
+            <th>Total Price</th>
+            <th>Delevery address</th>
+            <th>Place</th>
+            <th>Distict</th>
+         
+        </tr>
+        {% for i in Pdt %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.cid.booking.user.name}}</td>
+                <td>{{i.cid.product.name}}</td>
+                <td>{{i.cid.product.rate}}</td>
+                <td>{{i.cid.booking.user.address}}</td>
+                <td>{{i.cid.booking.user.place}}</td>
+                <td>{{i.cid.booking.user.place.district}}</td>
+              
+            </tr>
+            {% endfor %}
+    </table>
+</body>
+</html>
+
+{% endblock content %}

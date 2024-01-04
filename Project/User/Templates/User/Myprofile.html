@@ -1,0 +1,75 @@
+{% extends 'User/Head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+.pcoded-inner-content{
+    background-image: url(../../../Guest/static/main/images/zzzz.avif);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size:cover;
+    
+}
+.clrfrm{
+    background-color:rgb(243, 242, 205);
+    opacity:95%;
+}
+</style>
+<div class="pcoded-inner-content">
+<br><br><br>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table border="1" align="center" cellpadding="10" style="border-collapse: collapse;" class="clrfrm">
+            <tr>
+                <td colspan="2" align="center">
+                    <img src="{{p.photo.url}}" alt="img" width="120px" height="120px" style="border-radius: 60px;">
+                </td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{p.name}}</td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td>{{p.contact}}</td>
+            </tr>
+            <tr>
+                <td>E-mail</td>
+                <td>{{p.email}}</td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>{{p.gender}}</td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>{{p.address}}</td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td>{{p.place.district}}</td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td>{{p.place}}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><a href="{%  url 'user:editprofile' p.id %}">EDIT_PROFILE</a>||
+                    <a href="{%  url 'user:changepass' p.id %}">CHANGE_PASSWORD</a></td>
+            </tr>
+        </table>
+    </form>
+</body>
+<br><br>
+<br></div>
+</html>
+
+{% endblock content %}

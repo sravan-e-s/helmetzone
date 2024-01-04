@@ -1,0 +1,52 @@
+{% extends 'Deleveryboy/Home.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table border="1" align="center" cellpadding="10" style="border-collapse: collapse;">
+            <tr>
+                <td colspan="2" align="center"><img src="{{d.photo.url}}" alt="img" width="120px" height="120px" style="border-radius: 60px;"></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{d.name}}</td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td>{{d.contact}}</td>
+            </tr>
+            <tr>
+                <td>E-mail</td>
+                <td>{{d.email}}</td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>{{d.address}}</td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td>{{d.place.district}}</td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td>{{d.place}}</td>
+            </tr>
+            <tr>
+                <td><a href="{%  url 'delevery:editdboy' d.id %}">EDIT_PROFILE</a></td>
+                <td> <a href="{%  url 'delevery:changepassdboy' d.id %}">CHANGE_PASSWORD</a></td></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+
+{% endblock content %}
